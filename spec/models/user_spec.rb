@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
-  
   before(:all) do
     @user = User.new(name: 'Lilly', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Poland.')
   end
@@ -46,6 +44,4 @@ RSpec.describe User, type: :model do
     @user.posts_counter = -1
     expect(@user).to_not be_valid
   end
-
 end
-

@@ -1,11 +1,10 @@
 class UsersController < ApplicationController
-  def index; end
 
-  def show
-    @user = 'here is the profile of the user'
+  def index
+    @users = User.all
   end
 
-  def post
-    @posts = "here are the posts of the user with id #{params[:id]}"
+  def show
+    @user = User.find(params[:id])
   end
 end

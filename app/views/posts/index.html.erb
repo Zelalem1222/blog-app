@@ -1,1 +1,29 @@
-<h1><%= @posts %></h1>
+<section class="container">
+
+  <% @posts.each do |post| %>
+    <div class="post-info">
+      
+        <p class="post-title">Post : <%= post.title %> by <%= post.author.name %></p>
+        <p class="post-text"><%= post.text %></p>
+        <p class="post-text-2">Comments: <span><%= post.comments_counter || 0 %>, Likes: <%= post.likes_counter || 0 %></span></p>
+      
+    </div>
+    <div class="comment-info">
+      <% post.most_recent_comments.each do |comment| %>
+        <p>
+          <span>
+            <%= comment.author.name %>:
+          </span>
+          <span>
+            <%= comment.text %>
+          </span>
+        </p>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="button-user">
+    <button class="button">
+      Pagination
+    </button>
+  </div>
+</section>

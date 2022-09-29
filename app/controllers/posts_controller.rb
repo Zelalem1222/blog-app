@@ -31,5 +31,4 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:tittle, :text, :comments_counter, :likes_counter)
   end
-  
 end

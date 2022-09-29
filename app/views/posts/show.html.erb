@@ -18,7 +18,12 @@
             <%= comment.text %>
           </span>
         </p>
-      </div>
+      </div> 
     <% end %>
+    <%= render 'new_comment', post: @post %>
+    <div class="like-btn"> 
+      <%= render 'new_like' , post: @post %>
+    </div> 
   </div>
+
 </section>

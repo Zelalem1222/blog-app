@@ -1,0 +1,10 @@
+
+<%= form_with model: Comment, url: user_post_comments_path(@post.author, @post), class: "form-control",method: :post do |form| %>
+    <div>
+      <%= form.label :text %>
+      <%= form.text_area :text, placeholder: "Type your comment here!", rows: 20, required: true,  class: "form-post-text" %>
+    </div>
+    <div>
+      <%= form.submit "Save", class: "btn btn-primary" %>
+    </div>
+    <% end %>

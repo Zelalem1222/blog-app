@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
+   
   def index
     @user = User.find(params[:user_id])
-    @posts = @user.posts.includes(:comments)
+    @posts = Post.all
   end
 
   def show
@@ -13,22 +14,64 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.author_id = current_user.id
-
+    @post = current_user.posts.new(post_params)
     if @post.save
-      @post.update_user_post_counter(params[:user_id])
-      redirect_to user_post_path(@user.id)
-      flash[:notice] = 'Your comment was successfully created'
+      redirect_to user_post_path(current_user, @post)
     else
-      redirect_to new_user_post_path(@user.id)
-      flash[:notice] = 'An error has occurred while creating the post'
+      render :new
     end
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:tittle, :text, :comments_counter, :likes_counter)
+    params.require(:post).permit(:title, :text)
   end
 end
+
+# Path: app\views\posts\index.html.erb
+# Compare this snippet from app\views\comments\index.html.erb:
+# <h1>Comments</h1>
+# 
+# <ul>
+#   <% @comments.each do |comment| %>
+#     <li>
+#       <%= comment.text %>
+#     </li>
+#   <% end %>
+# </ul>
+# 
+# <%= link_to "New Comment", new_comment_path %>
+# 
+# Compare this snippet from app\views\likes\index.html.erb:
+# <h1>Likes</h1>
+# 
+# <ul>
+#   <% @likes.each do |like| %>
+#     <li>
+#       <%= like.post.title %>
+#     </li>
+#   <% end %>
+# </ul>
+# 
+# <%= link_to "New Like", new_like_path %>
+# 
+# Compare this snippet from app\views\users\index.html.erb:
+# <h1>Users</h1>
+# 
+# <ul>
+#   <% @users.each do |user| %>
+#     <li>
+#       <%= user.name %>
+#     </li>
+#   <% end %>
+# </ul>
+# 
+# <%= link_to "New User", new_user_path %>
+# 
+# class PostsController < ApplicationController
+  # def index
+    # @posts = Post.all
+  # end
+
+# end

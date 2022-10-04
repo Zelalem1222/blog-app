@@ -13,11 +13,10 @@
   </head>
 
   <body>
+  <%= render partial: 'shared/navbar'%>
   <%= render partial: 'shared/flash' %>
   <div class="container">
-  <div class="d-flex align-items-center justify-content-center">
-   <h1>Blog App</h1>
-    </div>
+
     <%= yield %>
     </div>
   </body>

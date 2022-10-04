@@ -57,6 +57,14 @@ RSpec.describe 'posts index ', type: :feature do
     expect(page).to have_content(@post.likes_counter)
   end
 
+  it 'can see a section for pagination if there are more posts than fit on the view' do
+    10.times do |i|
+      Post.create(title: "post#{i}", text: "text#{i}", author: @user, comments_counter: 0, likes_counter: 0)
+    end
+    visit(user_posts_path(@user.id))
+    expect(page).to have_content('Pagination')
+  end
+
   it 'should redirect to the post show page when clicking on the post title' do
     visit(user_posts_path(@user.id))
     click_link 'post1'

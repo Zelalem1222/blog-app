@@ -4,15 +4,15 @@
     <%= form.hidden_field :comments_counter, value: 0 %>
     <%= form.hidden_field :likes_counter, value: 0 %>
     <div class="mb-3 mt-3">
-      <%= form.label :title %>
-      <%= form.text_field :title, placeholder: "Title", required: true, class: "form-post-title" %>
+      <%= form.label :title , class: "form-lable" %>
+      <%= form.text_field :title, placeholder: "Title", required: true, class: "form-control" %>
     </div>
     <div>
-      <%= form.label :text %>
-      <%= form.text_area :text, placeholder: "Type your post here!", rows: 20, required: true,  class: "form-post-text" %>
+      <%= form.label :text , class: "form-lable"%>
+      <%= form.text_area :text, placeholder: "Type your post here!", rows: 5, required: true,  class: "form-control" %>
     </div>
     <div>
-      <%= form.submit "Save", class: "button" %>
+      <%= form.submit "Save", class: "btn btn-primary" %>
     </div>
   <% end %>
 </section>

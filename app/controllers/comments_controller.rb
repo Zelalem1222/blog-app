@@ -4,9 +4,9 @@ class CommentsController < ApplicationController
     @comment.post_id = params[:post_id]
 
     if @comment.save
-      redirect_to user_post_path(current_user, @comment.post)
+      redirect_to user_post_path(current_user, @comment.post), notice: 'Comment was successfully created.'
     else
-      render :create
+      render :new, alert: 'Comment was not created.'
     end
   end
 

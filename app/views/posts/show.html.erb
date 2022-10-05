@@ -6,6 +6,9 @@
     </div>
     <p><%= @post.text %></p>
      <p class="comment-text">Comments: <%= @post.comments_counter || 0 %>, Likes: <%= @post.likes_counter || 0 %></p>
+      <% if can? :destroy , @post %>
+          <%= button_to 'Delete', user_post_path(@user , @post), method: :delete, class: "btn btn-danger" %>
+        <%end%>
   </div>
   <div class="comment-info">
     <% @post.most_recent_comments.each do |comment| %>
@@ -19,6 +22,9 @@
           </span>
         </p>
       </div> 
+      <% if can? :destroy , comment %>
+        <%= button_to "Delete Comment" , user_post_comment_path(@user , @post , comment) , method: :delete , class: "btn btn-danger" %>
+      <%end%>
     <% end %>
     <%= render 'new_comment', post: @post %>
     <div class="like-btn"> 

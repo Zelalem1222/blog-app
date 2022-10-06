@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
-
   protect_from_forgery with: :exception, unless: -> { request.format.json? }
-  
+
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -16,16 +15,17 @@ class ApplicationController < ActionController::Base
 
   def authorize_request
     header = request.headers['Authorization']
-    header = header.split.last if header
-    begin
-      @decoded = JsonWebToken.decode(header)
-      @current_user = User.find(@decoded[:user_id])
-    rescue ActiveRecord::RecordNotFound => e
-      render json: { errors: e.message }, status: :unauthorized
-    rescue JWT::DecodeError => e
-      render json: { errors: e.message }, status: :unauthorized
+    if header
+      header = header.split.last
+
+      begin
+        @decoded = JsonWebToken.decode(header)
+        @current_user = User.find_by_id!(@decoded[:user_id])
+      rescue ActiveRecord::RecordNotFound || JWT::DecodeError => e
+        render json: { error: e.message }, status: :unauthorized
+      end
+    else
+      render json: { error: 'Unauthorized User' }, status: :unauthorized
     end
   end
-
-  
 end

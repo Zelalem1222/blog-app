@@ -4,14 +4,13 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     @users = User.all
-    
+
     respond_to do |format|
-        format.json { render json: @users }
+      format.json { render json: @users }
     end
   end
 
-  def show 
-    
+  def show
     render json: @user, status: :ok
   end
 
@@ -22,6 +21,4 @@ class Api::V1::UsersController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     render json: { message: 'User not found' }, status: :not_found
   end
-
 end
-

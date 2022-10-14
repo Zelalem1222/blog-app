@@ -92,11 +92,6 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: blog_db-Production
-  host: localhost
-  pool: 5
-  username: zelalemf
-  password: <%= ENV['blog_db_Password']  %>
-  role: MyRole
+ <<: *default
+  database: blog_db_production
+  password: <%= ENV["BLOG_DB_DATABASE_PASSWORD"] %>

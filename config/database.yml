@@ -92,6 +92,6 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
- <<: *default
-  database: blog_db_production
-  password: <%= ENV["BLOG_DB_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
+
+    

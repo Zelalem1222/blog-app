@@ -67,6 +67,9 @@ group :development, :test do
   gem 'rspec-rails', '>= 3.11.0'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'rake'
+gem 'rspec'
+gem 'kramdown'
 end
 
 group :development do
